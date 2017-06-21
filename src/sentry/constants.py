@@ -40,7 +40,6 @@ INTEGRATION_DOCS_ROOT = os.path.join(MODULE_ROOT, 'integration-docs')
 def get_all_platform_integrations():
     results = []
     file = os.path.join(INTEGRATION_DOCS_ROOT, '_platforms.json')
-    print(file)  # pylint: disable=B314
     import os
     os.system('ls')
     os.system('tree')
