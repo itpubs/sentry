@@ -9,6 +9,7 @@ from django.utils import timezone
 from rest_framework import serializers, status
 from rest_framework.response import Response
 
+from sentry import constants
 from sentry.api.base import DocSection
 from sentry.api.bases.project import ProjectEndpoint, ProjectPermission
 from sentry.api.decorators import sudo_required
@@ -72,10 +73,17 @@ def clean_newline_inputs(value):
     return result
 
 
+platform_integrations = constants.get_all_platform_integrations()
+platforms_list = []
+
+for platform in platform_integrations:
+    platforms_list.append((platform, platform))
+
+
 class ProjectMemberSerializer(serializers.Serializer):
     isBookmarked = serializers.BooleanField()
     isSubscribed = serializers.BooleanField()
-    platform = serializers.CharField(required=False)
+    platform = serializers.ChoiceField(choices=platforms_list, required=False)
 
 
 class ProjectAdminSerializer(serializers.Serializer):
@@ -87,7 +95,7 @@ class ProjectAdminSerializer(serializers.Serializer):
     digestsMaxDelay = serializers.IntegerField(min_value=60, max_value=3600)
     subjectPrefix = serializers.CharField(max_length=200)
     subjectTemplate = serializers.CharField(max_length=200)
-    platform = serializers.CharField(required=False)
+    platform = serializers.ChoiceField(choices=platforms_list, required=False)
 
     def validate_digestsMaxDelay(self, attrs, source):
         if attrs[source] < attrs['digestsMinDelay']:

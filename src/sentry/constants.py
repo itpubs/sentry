@@ -13,6 +13,7 @@ from __future__ import absolute_import, print_function
 import logging
 import os.path
 import six
+import json
 
 from collections import OrderedDict
 from django.conf import settings
@@ -33,6 +34,19 @@ def get_all_languages():
 
 MODULE_ROOT = os.path.dirname(__import__('sentry').__file__)
 DATA_ROOT = os.path.join(MODULE_ROOT, 'data')
+INTEGRATION_DOCS_ROOT = os.path.join(MODULE_ROOT, 'integration-docs')
+
+
+def get_all_platform_integrations():
+    results = []
+    file = os.path.join(INTEGRATION_DOCS_ROOT, '_platforms.json')
+    platforms_json = json.loads(open(file).read())
+
+    for platform in platforms_json['platforms']:
+        for integration in platform['integrations']:
+            results.append(integration['id'])
+    return results
+
 
 SORT_OPTIONS = OrderedDict((
     ('priority', _('Priority')),
@@ -207,6 +221,7 @@ VALID_PLATFORMS = set([
     'haskell',
     'groovy',
 ])
+
 
 OK_PLUGIN_ENABLED = _("The {name} integration has been enabled.")
 

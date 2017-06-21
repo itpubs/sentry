@@ -4,6 +4,7 @@ from django.db import IntegrityError, transaction
 from rest_framework import serializers, status
 from rest_framework.response import Response
 
+from sentry import constants
 from sentry.api.base import DocSection
 from sentry.api.bases.team import TeamEndpoint, TeamPermission
 from sentry.api.serializers import serialize
@@ -33,12 +34,18 @@ def create_project_scenario(runner):
         }
     )
 
+PLATFORM_INTEGRATIONS = constants.get_all_platform_integrations()
+platforms_list = []
+
+for platform in PLATFORM_INTEGRATIONS:
+    platforms_list.append((platform, platform))
+
 
 class ProjectSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=64, required=True)
     slug = serializers.RegexField(r'^[a-z0-9_\-]+$', max_length=50,
                                   required=False)
-    platform = serializers.CharField(required=False)
+    platform = serializers.ChoiceField(choices=platforms_list, required=False)
 
 # While currently the UI suggests teams are a parent of a project, in reality
 # the project is the core component, and which team it is on is simply an
