@@ -40,6 +40,10 @@ INTEGRATION_DOCS_ROOT = os.path.join(MODULE_ROOT, 'integration-docs')
 def get_all_platform_integrations():
     results = []
     file = os.path.join(INTEGRATION_DOCS_ROOT, '_platforms.json')
+    print(file)
+    import os;
+    os.system('ls')
+    os.system('tree')
     platforms_json = json.loads(open(file).read())
 
     for platform in platforms_json['platforms']:
