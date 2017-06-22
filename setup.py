@@ -61,7 +61,6 @@ for m in ('multiprocessing', 'billiard'):
         pass
 
 IS_LIGHT_BUILD = os.environ.get('SENTRY_LIGHT_BUILD') == '1'
-
 dev_requires = [
     'Babel',
     'flake8>=2.6,<2.7',

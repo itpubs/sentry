@@ -207,7 +207,7 @@ travis-test-acceptance: test-acceptance
 travis-test-js: test-js
 travis-test-cli: test-cli
 travis-test-dist:
-	SENTRY_BUILD=$(TRAVIS_COMMIT) SENTRY_LIGHT_BUILD=0 python setup.py sdist bdist_wheel
+	SENTRY_BUILD=$(TRAVIS_COMMIT) SENTRY_LIGHT_BUILD=0 python setup.py build_integration_docs sdist bdist_wheel
 	@ls -lh dist/
 travis-test-django-18: travis-test-postgres
 
