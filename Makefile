@@ -108,7 +108,7 @@ test-js:
 
 test-python:
 	@echo "--> Running Python tests"
-	py.test tests/integration tests/sentry || exit 1
+	py.test tests/integration tests/sentry  -s || exit 1
 	@echo ""
 
 test-acceptance:
