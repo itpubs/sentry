@@ -29,8 +29,8 @@ Schema Changes
 - Drop index on ``ReleaseCommit(project_id)``
 - Drop unique constraint on ``ReleaseEnvironment(project_id, release_id, environment_id)``
 - Added GroupResolution.type
-- Added GropuResolution.actor_id
-- Added ScheduledJob
+- Added GroupResolution.actor_id
+- Added ``ScheduledJob`` model
 
 API Changes
 ~~~~~~~~~~~
