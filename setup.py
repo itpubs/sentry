@@ -163,7 +163,7 @@ class SentryBuildCommand(BuildCommand):
         BuildCommand.run(self)
         if not IS_LIGHT_BUILD:
             self.run_command('build_assets')
-            self.run_command('build_integration_docs')
+        self.run_command('build_integration_docs')
 
 
 class SentryDevelopCommand(DevelopCommand):
