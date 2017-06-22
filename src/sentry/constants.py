@@ -41,7 +41,9 @@ def get_all_platform_integrations():
     results = []
     file = os.path.join(INTEGRATION_DOCS_ROOT, '_platforms.json')
     os.system('ls')
-    os.system('tree')
+    os.system('ls ./src')
+    os.system('ls ./src/sentry')
+    os.system('ls ./src/sentry/integration-docs')
     platforms_json = json.loads(open(file).read())
 
     for platform in platforms_json['platforms']:
